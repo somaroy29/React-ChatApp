@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Add from "../img/john.jpg";
-import Sandy from "../img/Sandy.jpg";
-import Julie from "../img/Julie.jpg";
+
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
@@ -19,6 +18,7 @@ const Chats = () => {
     };
     currentUser.uid && getChats();
   }, [currentUser.uid]);
+  console.log(chats);
   return (
     <div className="chats">
       <div className="userchat">
