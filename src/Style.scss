@@ -1,0 +1,62 @@
+.formContainer {
+  background-color: lightblue;
+  font: optional;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .formWrapper {
+    
+    background-color: whitesmoke;
+    padding: 20px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    .logo{
+        font-weight: bold;
+        font-size: 24px;
+        font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: black;
+    }
+    .title{
+        color: chocolate;
+        font-size: 15px;
+        font-weight: bold;
+        gap: 5px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input{
+        padding: 15px;
+        border: none;
+        border-bottom: 2px solid crimson;
+        width: 250px;
+        &::placeholder{
+            color: darkcyan;
+        }
+      }
+      button{
+        background-color: wheat;
+        color: crimson;
+        padding: 10px;
+        font-weight: bold;
+        font-size: large;
+        border: navy;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+    p{
+        color: maroon;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 15px;
+    }
+  }
+}
