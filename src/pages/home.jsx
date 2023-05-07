@@ -1,7 +1,16 @@
-const ChatFeed = (props) => {
-  console.log(props);
+import React from "react";
+import { Sidebar } from "../Components/sidebar";
+import { Chat } from "../Components/chat";
 
-  return <div>ChatFeed</div>;
+const Home = () => {
+  return (
+    <div className="Home">
+      <div className="container">
+        <Sidebar />
+        <Chat />
+      </div>
+    </div>
+  );
 };
 
-export default ChatFeed;
+export default Home;

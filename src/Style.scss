@@ -1,3 +1,21 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .formContainer {
   background-color: lightblue;
   font: optional;
@@ -7,7 +25,6 @@
   height: 100vh;
 
   .formWrapper {
-    
     background-color: whitesmoke;
     padding: 20px 60px;
     border-radius: 10px;
@@ -15,33 +32,48 @@
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    .logo{
-        font-weight: bold;
-        font-size: 24px;
-        font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        color: black;
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      color: black;
     }
-    .title{
-        color: chocolate;
-        font-size: 15px;
-        font-weight: bold;
-        gap: 5px;
+    .title {
+      color: chocolate;
+      font-size: 13px;
+      padding: 15px;
+      font-weight: bold;
+      gap: 5px;
     }
     form {
       display: flex;
       flex-direction: column;
       gap: 10px;
-
-      input{
-        padding: 15px;
-        border: none;
-        border-bottom: 2px solid crimson;
-        width: 250px;
-        &::placeholder{
-            color: darkcyan;
+      label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        img {
+          height: 60px;
+          width: 60px;
+          display: flex;
+        }
+        span {
+          font-size: 12px;
         }
       }
-      button{
+      input {
+        padding: 19px;
+        border: none;
+        border-bottom: 2px solid peachpuff;
+        width: 250px;
+        &::placeholder {
+          color: darkcyan;
+        }
+      }
+      button {
         background-color: wheat;
         color: crimson;
         padding: 10px;
@@ -52,11 +84,234 @@
         cursor: pointer;
       }
     }
-    p{
-        color: maroon;
-        font-size: 15px;
-        font-family: Arial, Helvetica, sans-serif;
-        margin-top: 15px;
+    p {
+      color: maroon;
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-top: 15px;
+    }
+  }
+}
+
+.Home {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  background-color: burlywood;
+  .container {
+    border: 1px solid wheat;
+    border-radius: 10px;
+    width: 68%;
+    height: 80%;
+    display: flex;
+    overflow: hidden;
+    @include tablet {
+      width: 90%;
+    }
+    .sidebar {
+      flex: 1;
+      border-right: 1px solid black;
+      background-color: lightgray;
+      position: relative;
+      .navbar {
+        display: flex;
+        background-color: lightseagreen;
+        height: 6.5vh;
+        padding: 10px;
+        justify-content: space-between;
+        .logo {
+          font-weight: bold;
+          color: white;
+          @include tablet {
+            display: none;
+          }
+        }
+        .user {
+          color: white;
+          display: flex;
+          gap: 10px;
+          img {
+            object-fit: cover;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background-color: aquamarine;
+          }
+          button {
+            gap: 20px;
+            background-color: yellowgreen;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            height: 28px;
+            padding: 5px 5px;
+            @include tablet {
+              position: absolute;
+              bottom: 10px;
+            }
+          }
+        }
+      }
+      .search {
+        border: 1px solid green;
+        height: 25px;
+        background-color: lightgrey;
+        .searchForm {
+          input {
+            background-color: transparent;
+            border: none;
+            color: black;
+            outline: none;
+            &::placeholder {
+              padding: 5px;
+              color: black;
+            }
+          }
+        }
+        .userchat {
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: black;
+          &:hover {
+            background-color: lavender;
+          }
+          cursor: pointer;
+          img {
+            object-fit: cover;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+          }
+        }
+      }
+      .chats {
+        .userchat {
+          img {
+            object-fit: cover;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+          }
+          span {
+            font-weight: bold;
+            font-size: 18px;
+            font-weight: 500;
+          }
+          p {
+            color: brown;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .chat {
+      flex: 2;
+      background-color: darkcyan;
+      .chatInfo {
+        height: 6.5vh;
+        align-items: center;
+        display: flex;
+        background-color: lightseagreen;
+        justify-content: space-between;
+        padding: 10px;
+        color: white;
+        .chatIcons {
+          display: flex;
+          gap: 10px;
+          img {
+            height: 40px;
+            cursor: pointer;
+            border-radius: 30%;
+          }
+        }
+      }
+      .messages {
+        padding: 10px;
+        background-color: lightgrey;
+        height: calc(100% - 140px);
+        overflow: scroll;
+        .message {
+          display: flex;
+          gap: 20px;
+          .messageInfo {
+            display: flex;
+            flex-direction: column;
+            color: gray;
+            margin-bottom: 20px;
+            img {
+              height: 40px;
+              width: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+          }
+          .messageContent {
+            display: flex;
+            max-width: 80px;
+            flex-direction: column;
+            gap: 10px;
+            p {
+              padding: 10px;
+              background-color: darkcyan;
+              border-radius: 0px 10px 10px 10px;
+              height: 10px;
+              min-width: max-content;
+            }
+            img {
+              width: 50%;
+            }
+          }
+
+          &.owner {
+            flex-direction: row-reverse;
+            .messageContent {
+              p {
+                align-items: flex-end;
+                background-color: darkcyan;
+                color: black;
+                border-radius: 10px 0px 10px 10px;
+                height: 10px;
+              }
+            }
+          }
+        }
+      }
+      .input {
+        height: 50px;
+        background-color: whitesmoke;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        input {
+          outline: none;
+          width: 140px;
+          border: none;
+          font-size: 18px;
+          color: black;
+        }
+        .send {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          img {
+            height: 30px;
+            cursor: pointer;
+          }
+          button {
+            bottom: none;
+            padding: 5px 5px;
+            color: black;
+            background-color: lightblue;
+            cursor: pointer;
+            outline: none;
+          }
+        }
+      }
     }
   }
 }
