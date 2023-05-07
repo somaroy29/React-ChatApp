@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import Add from "../img/john.jpg";
 import {
   collection,
   query,

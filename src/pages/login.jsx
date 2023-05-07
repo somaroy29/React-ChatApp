@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import Add from "../img/add.png";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
