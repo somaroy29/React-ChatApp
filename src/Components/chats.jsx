@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Add from "../img/john.jpg";
-
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
-const Chats = () => {
+export const Chats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
@@ -21,13 +19,17 @@ const Chats = () => {
   console.log(chats);
   return (
     <div className="chats">
-      <div className="userchat">
-        <img src={Add} alt="" />
-        <div className="userChatInfo">
-          <span>Jane</span>
-          <p> Hello </p>
-        </div>
-      </div>
+      {chats.length > 0 &&
+        Object.entries(chats)?.map((chat) => (
+          <div className="userchat" key={chat[0]}>
+            <img src={chat[1].userInfo.photoURL} alt="" />
+            <div className="userChatInfo">
+              <span>{chat[1].userInfo.displayName}</span>
+              <p> {chat[1].userInfo.lastMessage?.text}</p>
+            </div>
+          </div>
+        ))}
+      ;
     </div>
   );
 };
