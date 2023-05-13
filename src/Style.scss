@@ -155,10 +155,10 @@
         }
       }
       .search {
-        border: 1px solid green;
-        height: 25px;
+        border-bottom: 1px solid green;
         background-color: lightgrey;
         .searchForm {
+          padding: 10px;
           input {
             background-color: transparent;
             border: none;
@@ -188,127 +188,128 @@
           }
         }
       }
-      .chats {
-        .userchat {
-          img {
-            object-fit: cover;
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-          }
-          span {
-            font-weight: bold;
-            font-size: 18px;
-            font-weight: 500;
-          }
-          p {
-            color: brown;
-            font-size: 13px;
-          }
-        }
-      }
     }
-    .chat {
+    .chats {
       flex: 2;
-      background-color: darkcyan;
-      .chatInfo {
-        height: 6.5vh;
-        align-items: center;
-        display: flex;
-        background-color: lightseagreen;
-        justify-content: space-between;
-        padding: 10px;
-        color: white;
-        .chatIcons {
-          display: flex;
-          gap: 10px;
-          img {
-            height: 40px;
-            cursor: pointer;
-            border-radius: 30%;
-          }
+      .userchat {
+        img {
+          object-fit: cover;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+        }
+        span {
+          font-weight: bold;
+          font-size: 18px;
+          font-weight: 500;
+        }
+        p {
+          color: brown;
+          font-size: 13px;
         }
       }
-      .messages {
-        padding: 10px;
-        background-color: lightgrey;
-        height: calc(100% - 140px);
-        overflow: scroll;
-        .message {
+      .chat {
+        flex: 3;
+        height: 100%;
+        .chatInfo {
+          height: 6.5vh;
+          align-items: center;
           display: flex;
-          gap: 20px;
-          .messageInfo {
+          background-color: lightseagreen;
+          justify-content: space-between;
+          padding: 10px;
+          color: white;
+          .chatIcons {
             display: flex;
-            flex-direction: column;
-            color: gray;
-            margin-bottom: 20px;
+            gap: 10px;
             img {
               height: 40px;
-              width: 40px;
-              border-radius: 50%;
-              object-fit: cover;
+              cursor: pointer;
+              border-radius: 30%;
             }
           }
-          .messageContent {
+        }
+        .messages {
+          padding: 10px;
+          background-color: lightgrey;
+          height: calc(100% - 140px);
+          overflow: scroll;
+          .message {
             display: flex;
-            max-width: 80px;
-            flex-direction: column;
-            gap: 10px;
-            p {
-              padding: 10px;
-              background-color: darkcyan;
-              border-radius: 0px 10px 10px 10px;
-              height: 10px;
-              min-width: max-content;
+            gap: 20px;
+            .messageInfo {
+              display: flex;
+              flex-direction: column;
+              color: gray;
+              margin-bottom: 20px;
+              img {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
             }
-            img {
-              width: 50%;
-            }
-          }
-
-          &.owner {
-            flex-direction: row-reverse;
             .messageContent {
+              display: flex;
+              max-width: 80px;
+              flex-direction: column;
+              gap: 10px;
               p {
-                align-items: flex-end;
+                padding: 10px;
                 background-color: darkcyan;
-                color: black;
-                border-radius: 10px 0px 10px 10px;
+                border-radius: 0px 10px 10px 10px;
                 height: 10px;
+                min-width: max-content;
+              }
+              img {
+                width: 50%;
+              }
+            }
+
+            &.owner {
+              flex-direction: row-reverse;
+              .messageContent {
+                p {
+                  align-items: flex-end;
+                  background-color: darkcyan;
+                  color: black;
+                  border-radius: 10px 0px 10px 10px;
+                  height: 10px;
+                }
               }
             }
           }
         }
-      }
-      .input {
-        height: 50px;
-        background-color: whitesmoke;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        input {
-          outline: none;
-          width: 140px;
-          border: none;
-          font-size: 18px;
-          color: black;
-        }
-        .send {
+        .input {
+          height: 50px;
+          background-color: whitesmoke;
+          padding: 10px;
           display: flex;
           align-items: center;
-          gap: 10px;
-          img {
-            height: 30px;
-            cursor: pointer;
-          }
-          button {
-            bottom: none;
-            padding: 5px 5px;
-            color: black;
-            background-color: lightblue;
-            cursor: pointer;
+          justify-content: space-between;
+          input {
             outline: none;
+            width: 140px;
+            border: none;
+            font-size: 18px;
+            color: black;
+          }
+          .send {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            img {
+              height: 30px;
+              cursor: pointer;
+            }
+            button {
+              bottom: none;
+              padding: 5px 5px;
+              color: black;
+              background-color: lightblue;
+              cursor: pointer;
+              outline: none;
+            }
           }
         }
       }

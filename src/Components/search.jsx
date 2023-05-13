@@ -31,6 +31,7 @@ export const Search = () => {
       setErr(true);
     }
   };
+
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };

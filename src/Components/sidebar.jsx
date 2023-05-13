@@ -8,7 +8,6 @@ export const Sidebar = () => {
     <div className="sidebar">
       <Navbar />
       <Search />
-      <Chats />
     </div>
   );
 };

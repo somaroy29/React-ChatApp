@@ -2,9 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+import { Chat } from "./chat";
 export const Chats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "usersChat", currentUser.uid), (doc) => {
@@ -16,12 +19,19 @@ export const Chats = () => {
     };
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-  console.log(chats);
+
+  const handleSelect = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
   return (
     <div className="chats">
-      {chats.length > 0 &&
+      {chats?.length > 0 &&
         Object.entries(chats)?.map((chat) => (
-          <div className="userchat" key={chat[0]}>
+          <div
+            className="userchat"
+            key={chat[0]}
+            onClick={handleSelect(chat[1].userInfo)}
+          >
             <img src={chat[1].userInfo.photoURL} alt="" />
             <div className="userChatInfo">
               <span>{chat[1].userInfo.displayName}</span>
@@ -29,7 +39,7 @@ export const Chats = () => {
             </div>
           </div>
         ))}
-      ;
+      <Chat></Chat>
     </div>
   );
 };
