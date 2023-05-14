@@ -17,7 +17,7 @@ export const Message = ({ message }) => {
       <div className="messageInfo">
         <img
           src={
-            message.senderId === currentUser.uid
+            message?.senderId === currentUser.uid
               ? currentUser.photoURL
               : userEvent.photoURL
           }
