@@ -7,12 +7,10 @@ import { db } from "../firebase";
 export const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
-
+  
   useEffect(() => {
-    console.log(data);
     const unsub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
-      console.log(doc.data());
+      doc.exists() && setMessages(doc.data().Messages);
     });
 
     return () => {
