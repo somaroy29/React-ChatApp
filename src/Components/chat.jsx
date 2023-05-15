@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Add from "../img/add.jpg";
-import Video from "../img/video.png";
-import Dots from "../img/dots.jpg";
-import Search from "../img/s.jpg";
+// import Add from "../img/add.jpg";
+// import Video from "../img/video.png";
+// import Dots from "../img/dots.jpg";
+// import Search from "../img/s.jpg";
 import Messages from "./messages";
 import Input from "./input";
 import { AuthContext } from "../context/AuthContext";
