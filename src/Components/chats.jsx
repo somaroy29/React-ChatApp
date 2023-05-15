@@ -33,7 +33,7 @@ export const Chats = () => {
       };
     };
     currentUser.uid && getChats();
-  }, []);
+  }, [currentUser.uid]);
 
   const handleSelect = (u) => {
     console.log("selelcted this user", u);
