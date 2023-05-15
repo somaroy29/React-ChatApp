@@ -22,54 +22,62 @@ export const Input = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleSend = async () => {
-    if (img) {
-      const storageRef = ref(storage, uuid());
-
-      const uploadTask = uploadBytesResumable(storageRef, img);
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
+    console.log(currentUser, data);
+    try {
+      if (img) {
+        const storageRef = ref(storage, uuid());
+        const uploadTask = uploadBytesResumable(storageRef, img);
+        
+        uploadTask.on(
+          (error) => {
+            //TODO:Handle Error
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+              await updateDoc(doc(db, "chats", data.chatId), {
+                messages: arrayUnion({
+                  id: uuid(),
+                  text,
+                  senderId: currentUser.uid,
+                  date: Timestamp.now(),
+                  img: downloadURL,
+                }),
+              });
             });
-          });
-        }
-      );
-    } else {
-      await updateDoc(doc, (db, "chats", data.chatId), {
-        Messages: arrayUnion({
-          id: uuid(),
+          }
+        );
+      } else {
+        const updateDocRef = doc(db, "chats", data.chatId);
+        await updateDoc(updateDocRef, {
+          Messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: currentUser.uid,
+            date: Timestamp.now(),
+          }),
+        });
+      }
+      const updateChatsRef = doc(db, "userChats", currentUser.uid);
+      await updateDoc(updateChatsRef, {
+        [data.chatId + ".lastMessage"]: {
           text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
       });
+
+      const updateChatsRefUser = doc(db, "userChats", data.user.uid);
+      await updateDoc(updateChatsRefUser, {
+        [data.chatId + ".lastMessage"]: {
+          text,
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+
+      setText("");
+      setImg(null);
+    } catch (ex) {
+      console.log(ex);
     }
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
-
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
-
-    setText("");
-    setImg(null);
   };
   return (
     <div className="input">

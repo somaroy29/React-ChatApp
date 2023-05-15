@@ -1,13 +1,13 @@
 import React from "react";
 import { Sidebar } from "../Components/sidebar";
-import { Chats } from "../Components/chats";
+import { Chat } from "../Components/chat";
 
 const Home = () => {
   return (
     <div className="Home">
       <div className="container">
         <Sidebar />
-        <Chats />
+        <Chat />
       </div>
     </div>
   );

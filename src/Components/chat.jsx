@@ -13,12 +13,12 @@ export const Chat = () => {
     <div className="chat">
       <div className="chatInfo">
         <span>{currentUser?.displayName}</span>
-        <div className="chatIcons">
+        {/* <div className="chatIcons">
           <img src={Add} alt="" />
           <img src={Video} alt="" />
           <img src={Dots} alt="" />
           <img src={Search} alt="" />
-        </div>
+        </div> */}
       </div>
       <Messages />
       <Input />

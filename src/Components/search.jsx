@@ -38,17 +38,33 @@ export const Search = () => {
 
   const handleSelect = async () => {
     //check whether the group(chats in firestore) exists, if not create
+    console.log("inside select");
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
+    console.log(combinedId);
     try {
-      const res = await getDoc(doc, (db, "chats", combinedId));
+      console.log("calling getDoc api");
+      const docRef = doc(db, "chats", combinedId);
+      const res = await getDoc(docRef);
+      console.log(res.exists());
       if (!res.exists()) {
         //create a chat in chats collection
-        await setDoc(doc, (db, "chats", combinedId), { messages: [] });
-        //create user chat
-        await updateDoc(doc, (db, "usersChat", user.uid), {
+        await setDoc(docRef, { messages: [] });
+        console.log("setDoc succesful")
+        
+        //create user chats
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
@@ -57,7 +73,10 @@ export const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) {}
+
+    } catch (err) {
+      console.log(err);
+    }
     setUser(null);
     setUsername("");
   };
@@ -74,7 +93,7 @@ export const Search = () => {
       {err && <span>User not found</span>}
       {user && (
         <div className="userchat" onClick={handleSelect}>
-          <img src={user.photoURL} alt="" />
+          <img src={user.photoURL} alt="" className="userChatImg"/>
           <div className="userChatInfo">
             <span>{user.displayName}</span>
           </div>

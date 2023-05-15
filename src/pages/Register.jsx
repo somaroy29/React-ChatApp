@@ -35,7 +35,7 @@ const Register = () => {
             email,
             photoURL: downloadURL,
           });
-          await setDoc(doc(db, "usersChat", res.user.uid), {});
+          await setDoc(doc(db, "userChats", res.user.uid), {});
           console.log("setDoc success");
           navigate("/");
           console.log("navigate success");
